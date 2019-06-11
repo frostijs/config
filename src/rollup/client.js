@@ -40,6 +40,9 @@ const rollup = ({
         'react-dom': 'ReactDOM'
       }
     },
+    watch: {
+      clearScreen: false
+    },
     plugins: clientPlugins({
       CONFIG,
       DIR_OUTPUT,

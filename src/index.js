@@ -1,4 +1,5 @@
 import babel from './babel';
+import jest from './jest';
 import rollup from './rollup';
 
-export { babel, rollup }; // eslint-disable-line
+export { babel, jest, rollup }; // eslint-disable-line

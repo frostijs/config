@@ -38,6 +38,9 @@ const rollup = ({
         colors: 'colors'
       }
     },
+    watch: {
+      clearScreen: false
+    },
     context: 'window',
     external: [
       'chokidar',
@@ -49,8 +52,10 @@ const rollup = ({
       'fs',
       'os',
       'path',
-      'redirect-https',
-      'react-helmet'
+      'react-helmet',
+      'react',
+      'react-dom',
+      'redirect-https'
     ],
     plugins: clientPlugins({
       CONFIG,

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4
+
+- Add jest config
+- Tell rollup not to clear console
+
 ## 1.0.3
 
 - Make sure we run build _before_ publishing 🙄
