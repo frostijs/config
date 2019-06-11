@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Update fallback input values
+
 ## 1.0.1
 
 - Add `@render` alias to babel

@@ -25,6 +25,8 @@ const rollup = ({
   if (input === undefined) {
     if (fs.pathExistsSync(`${ROOT}/src/Client.js`)) input = `${ROOT}/src/Client.js`;
     else if (fs.pathExistsSync(`${ROOT}/src/Client.jsx`)) input = `${ROOT}/src/Client.jsx`;
+    else if (fs.pathExistsSync(`${ROOT}/src/render/Client.js`)) input = `${ROOT}/src/render/Client.js`;
+    else if (fs.pathExistsSync(`${ROOT}/src/render/Client.jsx`)) input = `${ROOT}/src/render/Client.jsx`;
   }
 
   const ROLLUP = {
