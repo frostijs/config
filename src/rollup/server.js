@@ -1,13 +1,36 @@
-import plugins from './plugins.client';
+import fs from 'fs-extra';
+import clientPlugins from './plugins.client';
 
-const rollup = (opts) => {
-  const ROOT = opts.ROOT || opts.root;
+const rollup = ({
+  // REQUIRED
+  config,
+  root,
+  // OPTIONAL
+  library,
+  input,
+  output,
+  context,
+  plugins
+}) => {
+  const CONFIG = config;
+  const INPUT = input;
+  const LIBRARY = library !== undefined ? library.toLowerCase() : 'vanilla';
+  const OUTPUT = output;
+  const CONTEXT = context;
+  const PLUGINS = plugins;
+  const ROOT = root;
+
   const DIR_OUTPUT = `${ROOT}/.dist/`;
 
-  if (opts === undefined) opts = {};
+  if (input === undefined) {
+    if (fs.pathExistsSync(`${ROOT}/src/Server.js`)) input = `${ROOT}/src/Server.js`;
+    else if (fs.pathExistsSync(`${ROOT}/src/Server.jsx`)) input = `${ROOT}/src/Server.jsx`;
+    else if (fs.pathExistsSync(`${ROOT}/src/Express.js`)) input = `${ROOT}/src/Express.js`;
+    else if (fs.pathExistsSync(`${ROOT}/src/Express.jsx`)) input = `${ROOT}/src/Express.jsx`;
+  }
 
-  const config = {
-    input: 'src/Server.js',
+  const ROLLUP = {
+    input,
     output: {
       file: `${DIR_OUTPUT}ssr.js`,
       format: 'cjs',
@@ -26,17 +49,24 @@ const rollup = (opts) => {
       'fs',
       'os',
       'path',
-      'redirect-https'
+      'redirect-https',
+      'react-helmet'
     ],
-    plugins
+    plugins: clientPlugins({
+      CONFIG,
+      DIR_OUTPUT,
+      ROOT,
+      LIBRARY,
+      CLEAN: false
+    })
   };
 
-  if (opts.input) config.input = opts.input;
-  if (opts.output) config.output = opts.output;
-  if (opts.context) config.context = opts.context;
-  if (opts.plugins) config.plugins.concat(opts.plugins);
+  if (INPUT) ROLLUP.input = INPUT;
+  if (OUTPUT) ROLLUP.output = OUTPUT;
+  if (CONTEXT) ROLLUP.context = CONTEXT;
+  if (PLUGINS) ROLLUP.plugins.concat(PLUGINS);
 
-  return config;
+  return ROLLUP;
 };
 
 export default rollup;

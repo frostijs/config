@@ -10,7 +10,7 @@ const plugins = [
   }),
   resolve(),
   autoExternal({
-    builtins: false,
+    builtins: true,
     dependencies: true,
     packagePath: path.resolve('./package.json'),
     peerDependencies: true
@@ -18,39 +18,20 @@ const plugins = [
   minify()
 ];
 
-const external = [
-  'fs',
-  'os',
-  'path',
-  'rimraf',
-  'favicons',
-  'rollup-plugin-browsersync',
-  'rollup-plugin-postcss',
-  'rollup-plugin-replace',
-  'rollup-plugin-node-resolve',
-  'rollup-plugin-babel',
-  'rollup-plugin-commonjs',
-  'rollup-plugin-eslint',
-  'rollup-plugin-json',
-  'rollup-plugin-babel-minify'
-];
-
 export default [
   {
-    input: {
-      index: 'src/index.js'
-    },
+    input: 'src/index.js',
     output: [
       {
-        dir: 'dist/esm',
+        file: 'dist/config.esm.js',
         format: 'esm'
       },
       {
-        dir: 'dist/cjs',
+        file: 'dist/config.cjs.js',
         format: 'cjs'
       }
     ],
-    external,
+    external: ['fs', 'os', 'path'],
     plugins
   }
 ];

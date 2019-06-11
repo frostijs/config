@@ -1,7 +1,6 @@
-import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import rimraf from 'rimraf';
+import fs from 'fs-extra';
 import browsersync from 'rollup-plugin-browsersync';
 
 // CSS PLUGINS
@@ -20,14 +19,14 @@ import generateIcons from './util/favicon';
 import generateSW from './util/sw-generator';
 import basePlugins from './plugins.base';
 
-const clientPlugins = (opts) => {
-  if (opts === undefined) opts = {};
-  const { DIR_OUTPUT, ROOT, CONFIG } = opts;
+const clientPlugins = ({
+  CONFIG, DIR_OUTPUT, ROOT, LIBRARY, CLEAN
+}) => {
   const ENV = process.env.NODE_ENV;
   const DIR_CERT = path.join(os.homedir(), '.nodecert');
   const PORT = process.env.PORT || 1981;
 
-  const base = basePlugins(ROOT);
+  const base = basePlugins({ LIBRARY });
 
   const plugins = [
     {
@@ -35,8 +34,11 @@ const clientPlugins = (opts) => {
       name: 'diskCleaner',
       generateBundle() {
         if (fs.existsSync(DIR_OUTPUT)) {
-          console.log(`Frosti: cleaning path: ${DIR_OUTPUT}`.white); // eslint-disable-line
-          rimraf.sync(DIR_OUTPUT);
+          if (CLEAN) {
+            console.log('CLEAN', CLEAN);
+            console.log(`Frosti: cleaning path: ${DIR_OUTPUT}`.white); // eslint-disable-line
+            fs.removeSync(DIR_OUTPUT);
+          }
           generateIcons({ DIR_OUTPUT, ROOT, CONFIG });
           generateSW({ ROOT });
         }
@@ -73,7 +75,7 @@ const clientPlugins = (opts) => {
   ];
 
   // DEV ONLY PLUGINS
-  if (ENV === 'development' || process.env.DEV_SERVER) {
+  if (process.env.DEV_SERVER) {
     plugins.push(
       browsersync({
         open: false,

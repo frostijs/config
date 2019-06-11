@@ -1,0 +1,17 @@
+# SRC FILES
+index.js
+
+
+# DOT FILES
+*.log
+.editorconfig
+.eslintrc
+.gitignore
+.npmignore
+.nvmrc
+.prettierrc
+
+
+# OTHER
+package-lock.json
+rollup.config.js
