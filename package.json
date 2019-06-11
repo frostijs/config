@@ -17,6 +17,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production rollup -c ./rollup.config.js",
+    "prepublishOnly": "npm run build",
     "publish:major": "npm version major && npm publish",
     "publish:minor": "npm version minor && npm publish",
     "publish:patch": "npm version patch && npm publish"

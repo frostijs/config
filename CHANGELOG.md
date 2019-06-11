@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+
+- Make sure we run build _before_ publishing 🙄
+
 ## 1.0.2
 
 - Update fallback input values
