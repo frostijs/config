@@ -16,7 +16,10 @@
     "node": "10.15.x"
   },
   "scripts": {
-    "build": "NODE_ENV=production rollup -c ./rollup.config.js"
+    "build": "NODE_ENV=production rollup -c ./rollup.config.js",
+    "publish:major": "npm version major && npm publish",
+    "publish:minor": "npm version minor && npm publish",
+    "publish:patch": "npm version patch && npm publish"
   },
   "main": "./dist/config.cjs.js",
   "module": "./dist/config.esm.js",
