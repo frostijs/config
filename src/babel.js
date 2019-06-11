@@ -39,6 +39,7 @@ const babel = ({
             '@dist': `${ROOT}.dist`,
             '@lib': `${ROOT}lib`,
             '@public': `${ROOT}public`,
+            '@render': `${ROOT}src/render`,
             '@test': `${ROOT}test`
           }
         }
