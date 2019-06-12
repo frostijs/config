@@ -24,7 +24,6 @@ const babel = ({
     plugins: [
       '@babel/plugin-proposal-object-rest-spread',
       '@babel/plugin-syntax-dynamic-import',
-      'transform-postcss',
       [
         'module-resolver',
         {
