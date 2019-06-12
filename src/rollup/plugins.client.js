@@ -22,7 +22,7 @@ import basePlugins from './plugins.base';
 const clientPlugins = ({
   CONFIG, DIR_OUTPUT, ROOT, LIBRARY, CLEAN
 }) => {
-  const ENV = process.env.NODE_ENV;
+  const { DEV_SERVER, ENV } = process.env;
   const DIR_CERT = path.join(os.homedir(), '.nodecert');
   const PORT = process.env.PORT || 1981;
 
@@ -75,7 +75,7 @@ const clientPlugins = ({
   ];
 
   // DEV ONLY PLUGINS
-  if (process.env.DEV_SERVER) {
+  if (DEV_SERVER !== 'false' && DEV_SERVER !== false) {
     plugins.push(
       browsersync({
         open: false,
