@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.6
+
+- Fix vulnerabilities
+
+## 1.0.5
+
+- Update to pull `DEV_SERVER` option from `process.env`
+- Remove `babel-plugin-transform-postcss`
+
 ## 1.0.4
 
 - Add jest config

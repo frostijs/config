@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
-// import { eslint } from 'rollup-plugin-eslint';
+import { eslint } from 'rollup-plugin-eslint';
 import json from 'rollup-plugin-json';
 import minify from 'rollup-plugin-babel-minify';
 
@@ -38,9 +38,9 @@ const basePlugins = ({ LIBRARY }) => {
   }
 
   const plugins = [
-    // eslint({
-    //   exclude: ['node_modules/**/*', '**/*.css', '**/*.json', '**/*.scss', '**/*.styl']
-    // }),
+    eslint({
+      exclude: ['node_modules/**/*', '**/*.css', '**/*.json', '**/*.scss', '**/*.styl']
+    }),
     babel({
       exclude: 'node_modules/**'
     }),

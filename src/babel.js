@@ -1,3 +1,7 @@
+require.extensions['.css'] = () => {};
+require.extensions['.scss'] = () => {};
+require.extensions['.styl'] = () => {};
+
 const babel = ({
   library, plugins, presets, root, targets
 }) => {
@@ -27,19 +31,19 @@ const babel = ({
       [
         'module-resolver',
         {
-          root: ['./'],
+          root: [ROOT],
           alias: {
-            '@src': `${ROOT}src`,
-            '@containers': `${ROOT}src/containers`,
-            '@components': `${ROOT}src/components`,
-            '@css': `${ROOT}src/css/`,
-            '@styles': `${ROOT}src/css/`,
-            '@config': `${ROOT}config`,
-            '@dist': `${ROOT}.dist`,
-            '@lib': `${ROOT}lib`,
-            '@public': `${ROOT}public`,
-            '@render': `${ROOT}src/render`,
-            '@test': `${ROOT}test`
+            '@src': './src',
+            '@containers': './src/containers',
+            '@components': './src/components',
+            '@css': './src/css/',
+            '@styles': './src/css/',
+            '@config': './config',
+            '@dist': './.dist',
+            '@lib': './lib',
+            '@public': './public',
+            '@render': './src/render',
+            '@test': './test'
           }
         }
       ]
